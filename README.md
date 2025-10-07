@@ -44,6 +44,7 @@ Flight Logger is completely free with all features unlocked. If you find it usef
 
 - Apple Watch Series 5 or later
 - watchOS 10 or newer
+- Recommended Screen 44 mm or higher
 
 ## Safety Notice
 
