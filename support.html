@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support & FAQ - Flight Logger</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.8;
+            color: #333;
+        }
+        h1 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #764ba2;
+            margin-top: 40px;
+        }
+        .faq-item {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .contact-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        .contact-box a {
+            color: white;
+            font-weight: bold;
+        }
+        .warning-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .warning-note strong {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Home</a>
+    
+    <h1>Support & FAQ - Flight Logger</h1>
+
+    <div class="warning-note">
+        <strong>⚠️ Important Safety Notice:</strong> Flight Logger is designed primarily for aerobatic pilots. G-force data from Apple Watch is FOR REFERENCE ONLY and should never replace aircraft instruments for safety-critical decisions. Always rely on your aircraft's accelerometer as the primary source of G-force data.
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+        <div class="faq-question">Why does the app request HealthKit permissions?</div>
+        <div class="faq-answer">Flight Logger uses HealthKit Workout Sessions to keep the app active during your flight. This prevents the app from accidentally closing when you move your wrist or press the Digital Crown. The app does NOT read or store any health data - it only uses the Workout Session feature to maintain foreground status.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">How accurate is the Apple Watch G-force measurement?</div>
+        <div class="faq-answer">
+            <strong>IMPORTANT:</strong> Apple Watch G-force data should be considered as SECONDARY INFORMATION ONLY. The accuracy varies significantly based on:
+            <ul>
+                <li>Watch position on your wrist</li>
+                <li>Arm movement during maneuvers</li>
+                <li>How tightly the watch is worn</li>
+                <li>Wrist orientation relative to aircraft axes</li>
+            </ul>
+            <strong>Always rely on your aircraft's instruments as the primary source of G-force data.</strong> Use watch data for reference and logging purposes only, never for safety-critical decisions.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">How do I prevent the app from closing during flight?</div>
+        <div class="faq-answer">When you start a flight, the app automatically starts a Workout Session which keeps it in the foreground. Make sure you've granted HealthKit permissions when first prompted. Additionally, set your watch's "Return to Clock Face" setting to 1 hour (the maximum) in your Apple Watch settings.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">How do the different time calculation methods work?</div>
+        <div class="faq-answer">
+            <ul>
+                <li><strong>Take-Off/Landing:</strong> Measures from take-off to landing + configurable taxi fee</li>
+                <li><strong>Hobbs:</strong> Based on manual Hobbs meter readings (departure and arrival)</li>
+                <li><strong>Block Time:</strong> From block start to block stop (chocks off to chocks on)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">How does G-force monitoring work?</div>
+        <div class="faq-answer">During aerobatic flights, the app uses your watch's accelerometer to measure G-forces in real-time. G-forces are displayed live during the aerobatic sequence. You can configure two alert rules:
+            <ul>
+                <li><strong>Rule 1:</strong> Alert when maximum G exceeds a threshold (default 6.0 G)</li>
+                <li><strong>Rule 2:</strong> Alert when G exceeds a threshold for a sustained duration (default 4.0 G for 5 seconds)</li>
+            </ul>
+            Remember: This data is for reference only. Always trust your aircraft's instruments.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Can I distinguish between positive and negative G-forces?</div>
+        <div class="faq-answer">The app attempts to distinguish G+ (positive) and G- (negative) based on the accelerometer's Z-axis. However, accuracy depends on how you wear your watch and the orientation of your arm during maneuvers. The app also tracks absolute maximum G regardless of direction for reliability. Use this data as reference only.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">How many flights can I store?</div>
+        <div class="faq-answer">The app automatically stores your last 10 flights. When you complete an 11th flight, the oldest flight is automatically deleted. All data is stored locally on your Apple Watch.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">How do Activity Trigger Rules work?</div>
+        <div class="faq-answer">You can configure how each activity type starts:
+            <ul>
+                <li><strong>Manual:</strong> You manually press START and STOP for the activity</li>
+                <li><strong>Auto Take-Off:</strong> Activity starts automatically at take-off, you press STOP manually</li>
+                <li><strong>Auto Take-Off/Landing:</strong> Activity starts at take-off and stops automatically at landing</li>
+            </ul>
+            Configure these in Settings → Activity Rules.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Does the app drain battery quickly?</div>
+        <div class="faq-answer">The Workout Session feature and accelerometer monitoring do consume more battery than normal watch usage. For aerobatic flights with G-force monitoring, battery consumption is higher. We recommend starting with a fully charged watch for flights longer than 2 hours. The app stops all monitoring as soon as you end the flight to preserve battery.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Can I export my flight data?</div>
+        <div class="faq-answer">Currently, flight data is stored locally on your Apple Watch and cannot be exported. Future versions may include export functionality. The app stores the last 10 flights with complete details including all timestamps, fuel data, and G-force information.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Is the app free?</div>
+        <div class="faq-answer">Yes, Flight Logger is completely free with all features unlocked. There are no in-app purchases, subscriptions, or locked features. If you find the app useful, you can support development via PayPal donation at DevOps@owwing.fr</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Which Apple Watch models are supported?</div>
+        <div class="faq-answer">Flight Logger requires Apple Watch Series 5 or later running watchOS 10 or newer. The app has been optimized and tested on Series 5 (44mm) and newer models.</div>
+    </div>
+
+    <h2>Getting Started</h2>
+    <ol>
+        <li>Grant HealthKit permissions when prompted (required for Workout Session)</li>
+        <li>Select your activity type (Aerobatics recommended for G-force monitoring)</li>
+        <li>Press START FLIGHT</li>
+        <li>Follow the sequential buttons: ENGINE START → TAKE OFF → etc.</li>
+        <li>For aerobatics: Press AEROBATICS START to begin G-force monitoring</li>
+        <li>Complete your flight sequence</li>
+        <li>After ENGINE STOP, enter Hobbs readings, fuel remaining, and passenger count</li>
+        <li>Press SUMMARY to review, then END FLIGHT to save</li>
+    </ol>
+
+    <h2>Tips for Best Results</h2>
+    <ul>
+        <li>Configure your preferred time calculation method in Settings before first flight</li>
+        <li>Set appropriate G-force alert thresholds for your aircraft and flying style</li>
+        <li>Wear your Apple Watch on your non-control hand for more stable readings</li>
+        <li>Wear the watch snugly but comfortably</li>
+        <li>Keep your watch charged - Workout Sessions consume more battery</li>
+        <li>Review Activity Trigger Rules to match your flying procedures</li>
+        <li><strong>Always cross-reference watch G-force data with aircraft instruments</strong></li>
+    </ul>
+
+    <div class="contact-box">
+        <h2>Need More Help?</h2>
+        <p>If your question isn't answered here, please contact us:</p>
+        <p><strong>Email:</strong> <a href="mailto:DevOps@owwing.fr">DevOps@owwing.fr</a></p>
+        <p style="margin-top:20px; font-size:0.9em;">We typically respond within 48 hours.</p>
+    </div>
+
+    <hr style="margin: 40px 0; border: none; border-top: 1px solid #ddd;">
+    <p style="text-align: center;"><a href="index.html">Back to Home</a> | <a href="privacy.html">Privacy Policy</a> | <a href="donate.html">Donate</a></p>
+</body>
+</html>
