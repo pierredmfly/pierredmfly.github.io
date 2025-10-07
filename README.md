@@ -32,13 +32,11 @@ Available on the App Store (coming soon)
 
 - **[Support & FAQ](https://pierredmfly.github.io/support.html)**
 - **[Privacy Policy](https://pierredmfly.github.io/privacy.html)**
-- **Contact**: DevOps@owwing.fr
+- **Contact**: See website for protected email
 
 ## Support Development
 
-Flight Logger is completely free with all features unlocked. If you find it useful, please consider supporting development:
-
-**PayPal**: DevOps@owwing.fr
+Flight Logger is completely free with all features unlocked. If you find it useful, please consider supporting development via PayPal donation.
 
 [Learn more about donations](https://pierredmfly.github.io/donate.html)
 
