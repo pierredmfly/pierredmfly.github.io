@@ -96,7 +96,17 @@
         
         <div class="paypal-box">
             <p style="font-size:1.1em; margin-bottom:15px;">If Flight Logger helps you fly safer and log more accurately, please consider supporting development with a PayPal donation:</p>
-            <div class="paypal-email">DevOps@owwing.fr</div>
+            <div class="paypal-email">
+                <span id="paypal-email-donate"></span>
+                <script>
+                document.getElementById('paypal-email-donate').innerHTML = 
+                  '&#68;&#101;&#118;&#79;&#112;&#115;' + 
+                  '&#64;' + 
+                  '&#111;&#119;&#119;&#105;&#110;&#103;' + 
+                  '&#46;&#102;&#114;';
+                </script>
+                <noscript>Contact via GitHub</noscript>
+            </div>
             <p style="font-size:0.9em; margin-top:15px;">Every donation, no matter how small, helps maintain and improve the app.</p>
         </div>
     </div>
@@ -134,7 +144,17 @@
     <ol>
         <li>Open PayPal or your PayPal app</li>
         <li>Select "Send Money"</li>
-        <li>Enter: <strong>DevOps@owwing.fr</strong></li>
+        <li>Enter: <strong>
+            <span id="paypal-email-instructions"></span>
+            <script>
+            document.getElementById('paypal-email-instructions').innerHTML = 
+              '&#68;&#101;&#118;&#79;&#112;&#115;' + 
+              '&#64;' + 
+              '&#111;&#119;&#119;&#105;&#110;&#103;' + 
+              '&#46;&#102;&#114;';
+            </script>
+            <noscript>DevOps @ owwing.fr</noscript>
+        </strong></li>
         <li>Choose your donation amount</li>
         <li>Add a note like "Flight Logger Support" (optional)</li>
         <li>Send!</li>
@@ -158,7 +178,19 @@
         <li>Integration with popular pilot logbook apps</li>
     </ul>
 
-    <p style="margin-top:40px; text-align:center; color:#666;">Questions about donations? Contact <a href="mailto:DevOps@owwing.fr">DevOps@owwing.fr</a></p>
+    <p style="margin-top:40px; text-align:center; color:#666;">Questions about donations? Contact 
+        <a href="#" onclick="window.location.href='mailto:' + atob('RGV2T3BzQG93d2luZy5mcg=='); return false;">
+            <span id="email-donate-footer"></span>
+            <script>
+            document.getElementById('email-donate-footer').innerHTML = 
+              '&#68;&#101;&#118;&#79;&#112;&#115;' + 
+              '&#64;' + 
+              '&#111;&#119;&#119;&#105;&#110;&#103;' + 
+              '&#46;&#102;&#114;';
+            </script>
+            <noscript>Email via GitHub</noscript>
+        </a>
+    </p>
 
     <hr style="margin: 40px 0; border: none; border-top: 1px solid #ddd;">
     <p style="text-align: center;"><a href="index.html">Back to Home</a> | <a href="support.html">Support & FAQ</a> | <a href="privacy.html">Privacy Policy</a></p>
