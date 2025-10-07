@@ -1,12 +1,12 @@
-# Flight Logger
+# Aerobatic Flight Logger
 
 **Aerobatic Flight Time Tracker for Apple Watch**
 
-![Flight Logger](app-icon.png)
+![Aerobatic Flight Logger](app-icon.png)
 
 ## Overview
 
-Flight Logger is a free Apple Watch app designed primarily for **aerobatic pilots** to track flight times and activities directly from their wrist. With real-time G-force monitoring, comprehensive fuel logging, and always-active operation during flights, Flight Logger is a useful tool to help you log flight metrics for your plane logbook and club management applications.
+Aerobatic Flight Logger is a free Apple Watch app designed primarily for **aerobatic pilots** to track flight times and activities directly from their wrist. With real-time G-force monitoring, comprehensive fuel logging, and always-active operation during flights, Aerobatic Flight Logger is a useful tool to help you log flight metrics for your plane logbook and club management applications.
 
 ### ⚠️ Important G-Force Disclaimer
 
@@ -36,7 +36,7 @@ Available on the App Store (coming soon)
 
 ## Support Development
 
-Flight Logger is completely free with all features unlocked. If you find it useful, please consider supporting development via PayPal donation.
+Aerobatic Flight Logger is completely free with all features unlocked. If you find it useful, please consider supporting development via PayPal donation.
 
 [Learn more about donations](https://pierredmfly.github.io/donate.html)
 
@@ -44,7 +44,7 @@ Flight Logger is completely free with all features unlocked. If you find it usef
 
 - Apple Watch Series 5 or later
 - watchOS 10 or newer
-- Recommended Screen 44 mm or higher
+- Recommended screen size: 44mm or higher
 
 ## Safety Notice
 
@@ -52,7 +52,7 @@ This app is a logging tool designed primarily for aerobatic pilots. G-force data
 
 ## License
 
-© 2025 Flight Logger - All rights reserved
+© 2025 Aerobatic Flight Logger - All rights reserved
 
 ---
 
