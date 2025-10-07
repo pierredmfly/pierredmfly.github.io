@@ -200,7 +200,17 @@
             <h2>Support Development</h2>
             <p>Flight Logger is completely <strong>FREE</strong> with all features unlocked.</p>
             <p>If you find it useful for your flying, please consider supporting development with a PayPal donation.</p>
-            <div class="paypal-email">DevOps@owwing.fr</div>
+            <div class="paypal-email">
+                <span id="paypal-email-main"></span>
+                <script>
+                document.getElementById('paypal-email-main').innerHTML = 
+                  '&#68;&#101;&#118;&#79;&#112;&#115;' + 
+                  '&#64;' + 
+                  '&#111;&#119;&#119;&#105;&#110;&#103;' + 
+                  '&#46;&#102;&#114;';
+                </script>
+                <noscript>Contact via GitHub</noscript>
+            </div>
             <p style="font-size:0.9em;">Your support helps maintain and improve Flight Logger. Thank you!</p>
             <div style="margin-top:20px;">
                 <a href="donate.html" style="background:white; color:#f5576c; padding:12px 30px; border-radius:25px; text-decoration:none; font-weight:bold; display:inline-block;">Learn More About Donations</a>
@@ -227,7 +237,19 @@
 
         <footer>
             <p>&copy; 2025 Flight Logger - Developed by Pierre DM</p>
-            <p>Contact: <a href="mailto:DevOps@owwing.fr" style="color:white;">DevOps@owwing.fr</a></p>
+            <p>Contact: 
+                <a href="#" onclick="window.location.href='mailto:' + atob('RGV2T3BzQG93d2luZy5mcg=='); return false;" style="color:white;">
+                    <span id="email-footer"></span>
+                    <script>
+                    document.getElementById('email-footer').innerHTML = 
+                      '&#68;&#101;&#118;&#79;&#112;&#115;' + 
+                      '&#64;' + 
+                      '&#111;&#119;&#119;&#105;&#110;&#103;' + 
+                      '&#46;&#102;&#114;';
+                    </script>
+                    <noscript>Email via GitHub</noscript>
+                </a>
+            </p>
         </footer>
     </div>
 </body>
