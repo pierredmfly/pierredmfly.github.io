@@ -43,6 +43,23 @@
         .back-link:hover {
             text-decoration: underline;
         }
+        .user-guide-button {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1em;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        .user-guide-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.3);
+        }
         .contact-box {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -71,6 +88,10 @@
     <a href="index.html" class="back-link">← Back to Home</a>
     
     <h1>Support & FAQ - Aerobatic Flight Logger</h1>
+
+    <div style="text-align: center; margin: 30px 0;">
+        <a href="userguide.html" class="user-guide-button">📖 Read the Complete User Guide</a>
+    </div>
 
     <div class="warning-note">
         <strong>⚠️ Important Safety Notice:</strong> Aerobatic Flight Logger is designed primarily for aerobatic pilots. G-force data from Apple Watch is FOR REFERENCE ONLY and should never replace aircraft instruments for safety-critical decisions. Always rely on your aircraft's accelerometer as the primary source of G-force data.
@@ -209,6 +230,6 @@
     </div>
 
     <hr style="margin: 40px 0; border: none; border-top: 1px solid #ddd;">
-    <p style="text-align: center;"><a href="index.html">Back to Home</a> | <a href="privacy.html">Privacy Policy</a> | <a href="donate.html">Donate</a></p>
+    <p style="text-align: center;"><a href="index.html">Back to Home</a> | <a href="userguide.html">User Guide</a> | <a href="privacy.html">Privacy Policy</a> | <a href="donate.html">Donate</a></p>
 </body>
 </html>
