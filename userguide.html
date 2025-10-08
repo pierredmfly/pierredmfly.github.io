@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Guide - Aerobatic Flight Logger</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.8;
+            color: #333;
+        }
+        h1 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #764ba2;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .screenshot {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .icon {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+            margin: 0 4px;
+        }
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .note strong {
+            color: #856404;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        .filename {
+            font-size: 0.85em;
+            color: #999;
+            font-style: italic;
+            text-align: center;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Home</a>
+    
+    <h1>Aerobatic Flight Logger - User Guide v1.0</h1>
+
+    <div class="section">
+        <h2>1. Home Screen</h2>
+        <img src="01-ActivitySelection-46mm.jpg" alt="Home Screen" class="screenshot">
+        
+        <p>Left top button <img src="IconHistory.jpg" alt="History" class="icon"> : Show Flights History</p>
+        <p>Right top button <img src="IconSettings.jpg" alt="Settings" class="icon"> : Access Settings</p>
+    </div>
+
+    <div class="section">
+        <h2>2. Settings: Flight Time Method</h2>
+        <img src="02-Settigs FLT Time method-46mm.jpg" alt="Flight Time Settings" class="screenshot">
+        
+        <p>Select the Flight Time calculation method:</p>
+        <ul>
+            <li><strong>TAKE OFF/LANDING</strong>: Flight time starts at TAKE OFF, ends at LANDING. An optional TAXI FEE is automatically added.</li>
+            <li><strong>HOBBS (ENGINE) time</strong>: Flight Time starts on tap ENGINE START, and stops on tap ENGINE STOP. With HOBBS method selected, a H button will appear on ENGINE START screen, at this moment you can enter the HOBBS Departure value. At the end, after ENGINE STOP action, the button HOBB will appear. You can enter the HOBBS arrival value. Those datas are recorded in flight history, there is no control nor calculation on this information.</li>
+            <li><strong>BLOCK TIME</strong>: In this case, a Block START button will appear after ENGINE START and before ENGINE STOP. Flight time will start when taping this button and stops on BLOCK STOP.</li>
+        </ul>
+        
+        <div class="note">
+            <strong>Please note that</strong> if you tap on BLOCK START then start a <strong>REFUELING</strong> sequence, the flight time will be <strong>RESET</strong>. It will start from zero after <strong>END REFUEL</strong> tap considering that Taxi to refuel and refueling time is not counted in the flight time when BLOCK/BLOCK method. This is the same after landing. If there is a REFUEL operation, Block time will stop and remain stopped until the end.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. Settings: Fuel Unit, Taxi Fee</h2>
+        <img src="03-Settings Fuel Unit-Taxi Fee.jpg" alt="Fuel Unit and Taxi Fee Settings" class="screenshot">
+        
+        <p>Select the <strong>FUEL UNIT</strong>. <strong>Note</strong>: A dual fuel unit for distinct flight is not managed. It is only a global display format for all those datas.</p>
+        <p>Select <strong>TAXI FEE</strong>: Taxi fee is the value in minutes that is added to the Flight Time when TAKE OFF/LANDING method is selected.</p>
+    </div>
+
+    <div class="section">
+        <h2>4. Settings: G-FORCES Alert Rules</h2>
+        <img src="04-Settings G-Forces-46mm.jpg" alt="G-Forces Settings" class="screenshot">
+        <img src="05-Settings G-Forces 2.jpg" alt="G-Forces Settings Detail" class="screenshot">
+        
+        <p>During aerobatic flights, the app uses your watch's accelerometer to measure G-forces in real-time. G-forces are displayed live during the aerobatic sequence. You can configure two alert rules:</p>
+        <ul>
+            <li><strong>Rule 1</strong>: Alert when maximum G exceeds a threshold (default 6.0 G)</li>
+            <li><strong>Rule 2</strong>: Alert when G exceeds a threshold for a sustained duration (default 4.0 G for 5 seconds)</li>
+        </ul>
+        
+        <div class="note">
+            <strong>Remember</strong>: This data is for reference only. Always trust your aircraft's instruments.
+        </div>
+        
+        <p>The app attempts to distinguish G+ (positive) and G- (negative) based on the accelerometer's Z-axis. However, accuracy depends on how you wear your watch and the orientation of your arm during maneuvers. <strong>The app also tracks absolute maximum G</strong> regardless of direction for reliability <strong>this "absolute" value is used for alerting</strong>. Use this data as reference only.</p>
+    </div>
+
+    <div class="section">
+        <h2>5. Settings: Activity Rules</h2>
+        <img src="06-Settings Activity Rules-46mm.jpg" alt="Activity Rules Settings" class="screenshot">
+        <img src="07-Settings Activity Rules-46mm.jpg" alt="Activity Rules Detail" class="screenshot">
+        
+        <p>You can configure how each activity type starts:</p>
+        <ul>
+            <li><strong>Manual</strong>: You manually press START and STOP for the activity</li>
+            <li><strong>Auto Take-Off</strong>: Activity starts automatically at take-off, you press STOP manually</li>
+            <li><strong>Auto Take-Off/Landing</strong>: Activity starts at take-off and stops automatically at landing</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>6. Start Flight</h2>
+        <img src="08-Start Flight H -46mm.jpg" alt="Start Flight Screen" class="screenshot">
+        
+        <p>Tap on ENGINE START to start your Flight session.</p>
+        <p>On the left top screen <img src="IconReturn.jpg" alt="Return" class="icon"> : if you tap on the return icon, you cancel your flight session and return to main menu.</p>
+        <p>On Flight Screen, the FLT TIME (Flight Time) is displayed, The TimeStamp of the active phase and the time spent on the active phase.</p>
+        <p>If you are under HOBBS flight time calculation, before ENGINE START tap on the blue H button to enter your HOBBS Departure value.</p>
+        
+        <img src="09-Hobbs Departure-46mm.jpg" alt="Hobbs Departure Entry" class="screenshot">
+    </div>
+
+    <div class="section">
+        <h2>7. Take-Off / Refuel</h2>
+        <img src="10-Takeoff-46mm.jpg" alt="Take-Off Screen" class="screenshot">
+        
+        <p>On this phase, note that FLT TIME (Flight Time) is remaining to 0 if flight time rule is TAKE OFF/LANDING. Chronometer is not running. You have the current phase TimeStamp.</p>
+        <p><strong>T-TIME</strong>: TAXI TIME (complete Taxi Duration will be available in SUMMARY and History Flight Detail).</p>
+        <p>After ENGINE START or BLOCK START you have 2 choices for the next phase:</p>
+        <ul>
+            <li><strong>TAKE OFF</strong>: Go for Take Off. If TAKE-OFF/LANDING rule then FLT TIME starts.</li>
+            <li><strong>REFUEL</strong></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>8. Refuel</h2>
+        <img src="11-REFUEL-46mm" alt="Refuel Screen" class="screenshot">
+        
+        <p><strong>F-TIME</strong>: Elapsed Time during REFUEL.</p>
+        <p>During this phase, you can enter the added FUEL quantity. <strong>Tap on the fuel pump icon <img src="IconFuel.jpg" alt="Fuel" class="icon">.</strong></p>
+        
+        <img src="12-Fuel Added-46mm.jpg" alt="Fuel Entry Screen" class="screenshot">
+        
+        <p>Enter the value of the fuel quantity added.</p>
+    </div>
+
+    <div class="section">
+        <h2>9. After Take Off</h2>
+        <img src="13-Aerobatic Start-46mm.jpg" alt="After Take Off Screen" class="screenshot">
+        
+        <p>After Take Off, the FLT-TIME will be always on screen. Take Off Time TimeStamp is displayed.</p>
+        <p>The <strong>O-TIME (OTHER TIME)</strong> is displayed.</p>
+        <p>Note that if you have set the activity to "<strong>AUTO TAKE-OFF</strong>" in settings it will skip this phase (Other Time).</p>
+    </div>
+
+    <div class="section">
+        <h2>10. Activity Start/Stop</h2>
+        <img src="14-Aerobatic Activity-46mm.jpg" alt="Activity Screen" class="screenshot">
+        
+        <p>The activity selected is displayed. For Aerobatic Activity ONLY the real time G-FORCES indicator is displayed. Be aware that G+ / G- notion may be inaccurate (see FAQ about this functionality). <strong>The Apple Watch display is not supposed to be watched during aerobatics maneuvers</strong>.</p>
+        <p><strong>A-TIME</strong> displays the activity running time.</p>
+        <p>Tap ACTIVITY STOP when you're done.</p>
+    </div>
+
+    <div class="section">
+        <h2>11. Landing</h2>
+        <img src="15-Landing-46mm.jpg" alt="Landing Screen" class="screenshot">
+        
+        <p>The TimeStamp of Activity Stop is displayed. <strong>O-TIME</strong> (Other Time) is resuming.</p>
+        <p>Note that if you have set up <strong>AUTO TAKE OFF / LANDING</strong> in the activity rule, the <strong>ACTIVITY STOP</strong> button will be replaced by <strong>LANDING</strong> (no O-TIME).</p>
+    </div>
+
+    <div class="section">
+        <h2>12. After Landing</h2>
+        <img src="16-After Landing-46mm.jpg" alt="After Landing Screen" class="screenshot">
+        
+        <p>After landing, you have the same 2 choices as before Take off: <strong>ENGINE STOP</strong> or <strong>REFUEL</strong>.</p>
+        <p>If you tap REFUEL it is the same screen as shown above. Refuel value entered will be stored as REFUEL-A (Refuel Arrival).</p>
+        <p>Note that <strong>T-TIME</strong> (Taxi Time) will resume from the value before Take Off. Total Taxi Time will be stored.</p>
+    </div>
+
+    <div class="section">
+        <h2>13. After ENGINE STOP</h2>
+        <img src="17-End Fligh-46mm.jpg" alt="End Flight Screen" class="screenshot">
+        
+        <p>After ENGINE STOP, you can enter values for G-FORCES (official plane instrument value which are to be considered as <strong>THE</strong> reference), <strong>PoB</strong> (People on Board), <strong>FUEL LEFT</strong> (remaining Fuel).</p>
+        <p>If <strong>HOBBS Rule is selected</strong> in SETTINGS, a blue button HOBB will be displayed and available to enter HOBBS value on arrival.</p>
+        
+        <img src="18-G-Forces logging values-46mm.jpg" alt="G-Forces Entry" class="screenshot">
+        
+        <p>Enter the G+ value and the G- value. <strong>To switch from one to the other, tap on the value on the screen</strong>.</p>
+        <p>Be aware that bottom screen keys are only active when fully visible on the screen. So you may have to fully scroll up to use . / 0 or backspace keys.</p>
+        
+        <img src="19-PoB-46mm.jpg" alt="PoB Entry" class="screenshot">
+        
+        <p>Enter the <strong>PoB</strong> value. By <strong>default the value is always set to 1</strong>. In this case you don't have to tap on PoB button when flight is done, the default value (1) will be stored for the flight.</p>
+        <p>PoB screen automatically pops up after validating G-Forces entries.</p>
+        <p>When all entries are completed, <strong>tap on SUMMARY</strong> to see Flight SUMMARY data.</p>
+        <p><strong>FUEL LEFT</strong> button: Enter the remaining fuel. (same screen than the REFUEL entry screen)</p>
+    </div>
+
+    <div class="section">
+        <h2>14. Flight SUMMARY</h2>
+        <img src="20- Summary Flight-46.jpg" alt="Flight Summary" class="screenshot">
+        
+        <p>In the first part of the Flight SUMMARY are the major information for the flight.</p>
+        <p>Note that the <strong>END TIME is calculated according to the Flight Time</strong>, <strong>including the TAXI FEE</strong> if Take off/Landing rule. So the <strong>END time may be in advance</strong> compared to the current time.</p>
+        
+        <img src="21-Summary G-Forces-46mm.jpg" alt="G-Forces Summary" class="screenshot">
+        
+        <p>Second part of the SUMMARY is dedicated to the Apple Watch accelerometer sensor. The number of Alerts during the session is logged regarding to Rule 1 and Rule 2.</p>
+        
+        <img src="22-Summary TimeStamps-46mm.jpg" alt="TimeStamps Summary" class="screenshot">
+        
+        <p>The third part of the SUMMARY is dedicated to all TimeStamps.</p>
+        
+        <img src="23-Summary Durations-46mm.jpg" alt="Durations Summary" class="screenshot">
+        
+        <p>Last part of SUMMARY is DURATIONS. The Flight Time in parentheses is without the TAXI FEE.</p>
+        
+        <div class="note">
+            <strong>Don't forget to scroll down and TAP on END FLIGHT to record DATA!</strong>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>15. Flight HISTORY</h2>
+        
+        <p>From the main screen tap on the History icon to access flight sessions history.</p>
+        
+        <img src="24-History.jpg" alt="Flight History" class="screenshot">
+        
+        <p><strong>Swipe left to DELETE</strong> a session.</p>
+        <p>The Flight Detail screen is similar to the Summary screen.</p>
+        
+        <p style="text-align: center; margin-top: 40px; font-size: 1.2em;"><strong>Enjoy and have a good Flight (watching mainly outside)! ✈️</strong></p>
+    </div>
+
+    <hr style="margin: 40px 0; border: none; border-top: 1px solid #ddd;">
+    <p style="text-align: center;"><a href="index.html">Back to Home</a> | <a href="support.html">Support & FAQ</a> | <a href="privacy.html">Privacy Policy</a></p>
+</body>
+</html>
