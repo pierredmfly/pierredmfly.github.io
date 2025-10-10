@@ -54,6 +54,34 @@
             margin-left: auto;
             margin-right: auto;
         }
+        .club-thanks {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 700px;
+            margin: 25px auto;
+        }
+        .club-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        .club-text {
+            color: white;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .club-text p {
+            margin: 0;
+        }
+        .club-text strong {
+            font-weight: 600;
+        }
         .download-badge {
             display: inline-block;
             margin: 20px 0;
@@ -141,6 +169,19 @@
             padding: 40px 20px;
             opacity: 0.9;
         }
+        /* Responsive pour mobile */
+        @media (max-width: 600px) {
+            .club-thanks {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .club-logo {
+                width: 70px;
+                height: 70px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -152,6 +193,14 @@
             <h1>Aerobatic Flight Logger</h1>
             <p class="tagline">Aerobatic Flight Time Tracker for Apple Watch</p>
             <p class="tribute">Special tribute and heartfelt thanks to Don Brax, Math & Computer Sciences teacher at Washington High School, Kansas, who planted the seed that blossomed nearly 40 years later.</p>
+            
+            <div class="club-thanks">
+                <img src="LogoCannes Voltige.png" alt="Cannes Voltige Logo" class="club-logo">
+                <div class="club-text">
+                    <p>Heartfelt thanks to <strong>Cannes Voltige</strong>, my aerobatic club at LFMD Airport, France. This amazing club sparked my passion for aerobatics. Special gratitude to the entire team and to Daniel, my instructor, who helped me achieve my FCL.800 qualification.</p>
+                </div>
+            </div>
+            
             <div class="download-badge">
                 <a href="https://apps.apple.com/app/aerobatic-flight-logger/id6753714191" style="display:inline-block;">
                     <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on App Store" style="height:60px;">
@@ -165,13 +214,14 @@
             <p style="font-size:1.1em; text-align:center; margin-bottom:30px;">
                 Aerobatic Flight Logger is a free Apple Watch app designed primarily for aerobatic pilots to track flight times and activities directly from their wrist. With real-time G-force monitoring, comprehensive fuel logging, and always-active operation during flights, Aerobatic Flight Logger is a useful tool to help you log flight metrics for your plane logbook and club management applications.
             </p>
-     <div class="warning-box">
-            <h3>⚠️ IMPORTANT G-FORCE DISCLAIMER</h3>
-            <p>Apple Watch accelerometer data should be considered as <strong>SECONDARY INFORMATION ONLY</strong>. Accuracy may vary significantly based on watch position and arm movement. G+ and G- measurements may differ substantially from aircraft accelerometer readings.</p>
-            <p style="margin-top:15px;"><strong>Always rely on your aircraft's instruments as the primary source of G-force data.</strong> Use watch data for reference purposes only.</p>
-            <p style="margin-top:15px;"><strong>The Apple Watch display is not supposed to be watched during aerobatic maneuvers.</strong> Focus on flying the aircraft and reference instruments!</p>
-            <p style="margin-top:15px;"><strong>SAFETY NOTICE:</strong> DO NOT look at or manipulate your Apple Watch during flight unless you can maintain full attention to your primary pilot responsibilities: AVIATE, NAVIGATE, COMMUNICATE, and collision avoidance. This application is provided "AS IS" without any warranty. Use of this application is entirely at your own risk and responsibility. The developer assumes no liability for any incidents, accidents, or damages resulting from the use of this application.</p>
-     </div>
+
+            <div class="warning-box">
+                <h3>⚠️ IMPORTANT G-FORCE DISCLAIMER</h3>
+                <p>Apple Watch accelerometer data should be considered as <strong>SECONDARY INFORMATION ONLY</strong>. Accuracy may vary significantly based on watch position and arm movement. G+ and G- measurements may differ substantially from aircraft accelerometer readings.</p>
+                <p style="margin-top:15px;"><strong>Always rely on your aircraft's instruments as the primary source of G-force data.</strong> Use watch data for reference purposes only.</p>
+                <p style="margin-top:15px;"><strong>The Apple Watch display is not supposed to be watched during aerobatic maneuvers.</strong> Focus on flying the aircraft and reference instruments!</p>
+                <p style="margin-top:15px;"><strong>SAFETY NOTICE:</strong> DO NOT look at or manipulate your Apple Watch during flight unless you can maintain full attention to your primary pilot responsibilities: AVIATE, NAVIGATE, COMMUNICATE, and collision avoidance. This application is provided "AS IS" without any warranty. Use of this application is entirely at your own risk and responsibility. The developer assumes no liability for any incidents, accidents, or damages resulting from the use of this application.</p>
+            </div>
             
             <div class="features">
                 <div class="feature">
