@@ -24,6 +24,12 @@
             margin-top: 30px;
             margin-bottom: 12px;
         }
+        h3 {
+            color: #667eea;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
         .back-link {
             display: inline-block;
             margin-bottom: 15px;
@@ -60,6 +66,23 @@
         .note strong {
             color: #856404;
         }
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .info-box strong {
+            color: #0d47a1;
+        }
+        .technical-section {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
         ul, ol {
             margin: 8px 0;
             padding-left: 30px;
@@ -69,6 +92,13 @@
         }
         p {
             margin: 8px 0;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
         }
         
         /* Mobile: Images plus grandes pour meilleure lisibilité */
@@ -82,12 +112,12 @@
 <body>
     <a href="index.html" class="back-link">← Back to Home</a>
 
-    <h1>Aerobatic Flight Logger - User Guide v1.0</h1>
+    <h1>Aerobatic Flight Logger - User Guide v1.1</h1>
 
     <div class="section">
-                <div class="note">
-                    <strong>New notice information (oct 12th)</strong>: G-Force data = a corrective update is in progress, coming soon.
-                </div>
+        <div class="info-box">
+            <strong>✅ Version 1.1 Update (October 2025)</strong>: G-Force measurement system has been completely redesigned for significantly improved accuracy. See section 16 for technical details.
+        </div>
         <h2>1. Home Screen</h2>
         <img src="01-ActivitySelection-46mm.jpg" alt="Home Screen" class="screenshot">
         <p>Left top button <img src="IconHistory.jpg" alt="History" class="icon"> : Show Flights History</p>
@@ -127,7 +157,7 @@
         <div class="note">
             <strong>Remember</strong>: This data is for reference only. Always trust your aircraft's instruments.
         </div>
-        <p>The app attempts to distinguish G+ (positive) and G- (negative) based on the accelerometer's Z-axis. However, accuracy depends on how you wear your watch and the orientation of your arm during maneuvers. <strong>The app also tracks absolute maximum G</strong> regardless of direction for reliability <strong>this "absolute" value is used for alerting</strong>. Use this data as reference only.</p>
+        <p><strong>Starting from version 1.1</strong>, the G-force measurement system has been completely redesigned for improved accuracy. See section 16 for detailed technical information about how the system works.</p>
     </div>
 
     <div class="section">
@@ -184,7 +214,7 @@
     <div class="section">
         <h2>10. Activity Start/Stop</h2>
         <img src="14-AerobaticActivity-46mm.jpg" alt="Activity Screen" class="screenshot">
-        <p>The activity selected is displayed. For Aerobatic Activity ONLY the real time G-FORCES indicator is displayed. Be aware that G+ / G- notion may be inaccurate (see FAQ about this functionality). <strong>The Apple Watch display is not supposed to be watched during aerobatics maneuvers</strong>.</p>
+        <p>The activity selected is displayed. For Aerobatic Activity ONLY the real time G-FORCES indicator is displayed. <strong>The Apple Watch display is not supposed to be watched during aerobatics maneuvers</strong>.</p>
         <p><strong>A-TIME</strong> displays the activity running time.</p>
         <p>Tap ACTIVITY STOP when you're done.</p>
     </div>
@@ -235,7 +265,7 @@
         </div>
     </div>
 
-<div class="section">
+    <div class="section">
         <h2>15. Flight HISTORY</h2>
         <p>From the main screen tap on the History icon to access flight sessions history.</p>
         <img src="24-History.jpg" alt="Flight History" class="screenshot">
@@ -244,7 +274,81 @@
     </div>
 
     <div class="section">
-        <h2>16. Bonus</h2>
+        <h2>16. G-Force Measurement System (Version 1.1+)</h2>
+        
+        <div class="info-box">
+            <strong>🆕 New in Version 1.1</strong>: The G-force measurement algorithm has been completely redesigned to provide significantly more accurate readings during aerobatic maneuvers.
+        </div>
+
+        <div class="technical-section">
+            <h3>How It Works</h3>
+            
+            <p><strong>Version 1.1 introduces a revolutionary approach to G-force measurement</strong> using advanced 3D vector analysis and automatic calibration. Here's how the system works:</p>
+
+            <h3>1. 3D Vector Magnitude Calculation</h3>
+            <p>Unlike traditional single-axis measurements, the app now calculates the <strong>total acceleration magnitude using all three axes</strong> (X, Y, Z) simultaneously. This ensures accurate readings <strong>regardless of wrist orientation</strong> during complex aerobatic maneuvers such as rolls, loops, or inverted flight.</p>
+            
+            <p>The system measures the vector norm (magnitude) of the acceleration in 3D space:</p>
+            <p style="text-align: center; font-family: monospace; background: #fff; padding: 10px; border-radius: 5px;">
+                G<sub>total</sub> = √(X² + Y² + Z²)
+            </p>
+
+            <h3>2. Automatic Calibration</h3>
+            <p>During your <strong>first positive G maneuver</strong> (typically the initial pull to 45° at approximately +2G in a barrel roll or similar figure), the system automatically calibrates by capturing the <strong>reference direction for positive G-forces</strong>.</p>
+            
+            <p>The calibration process:</p>
+            <ul>
+                <li>Waits for G-forces to exceed <strong>2.0 G</strong></li>
+                <li>Captures <strong>5 consecutive samples</strong> at this threshold</li>
+                <li>Averages these vectors to establish a reliable <strong>G+ reference direction</strong></li>
+                <li>This reference remains valid for the entire aerobatic session</li>
+            </ul>
+
+            <h3>3. Intelligent G+ / G- Detection</h3>
+            <p>The app uses <strong>geometric analysis in 3D space</strong> to distinguish between positive and negative G-forces. Imagine a sphere where every point represents a possible acceleration vector:</p>
+
+            <img src="g-forces-sphere-diagram.jpg" alt="G-Forces 3D Sphere Geometry" class="screenshot" style="max-width: 70%;">
+
+            <p>The detection zones are defined as follows:</p>
+            <ul>
+                <li><strong>G+ Zone (Green Cone)</strong>: Vectors within 45° of the reference direction create a 90° total opening cone. Any acceleration in this cone is classified as positive G-force.</li>
+                <li><strong>G- Zone (Red Cone)</strong>: Vectors in the opposite hemisphere (angle &gt; 135° from reference) are classified as negative G-force.</li>
+                <li><strong>Neutral Zone</strong>: Vectors between 45° and 135° are in a transition zone where the system uses proportional calculation.</li>
+            </ul>
+
+            <div class="note">
+                <strong>Mathematical principle</strong>: The system uses the dot product between the current acceleration vector and the reference vector to calculate the angle: <code>cos(θ) = (V⃗·R⃗) / (|V⃗| × |R⃗|)</code>
+            </div>
+
+            <h3>4. Low-Pass Filtering</h3>
+            <p>Raw accelerometer data contains significant noise and vibrations from the aircraft. Version 1.1 applies <strong>exponential smoothing</strong> (low-pass filter) to reduce noise while preserving important peak values. This ensures the displayed G-forces are stable and readable during flight.</p>
+
+            <h3>5. Alert System</h3>
+            <p>The alert system is based on <strong>absolute G magnitude</strong> for maximum reliability:</p>
+            <ul>
+                <li><strong>Rule 1</strong>: Instant alert when absolute G exceeds threshold (default: 6.0G)</li>
+                <li><strong>Rule 2</strong>: Alert when G exceeds threshold for sustained duration (default: 4.0G for 5 seconds)</li>
+            </ul>
+
+            <h3>Why This Approach is Better</h3>
+            <p>The previous version (1.0) used only the Z-axis perpendicular to the watch screen. This caused inaccurate readings when the wrist changed position during maneuvers. <strong>Version 1.1's 3D approach is orientation-independent</strong> and provides consistent accuracy regardless of how you wear your watch or position your arm during flight.</p>
+        </div>
+
+        <div class="note">
+            <strong>⚠️ Important Safety Notice</strong>: While version 1.1 significantly improves accuracy, Apple Watch accelerometer data remains <strong>FOR REFERENCE ONLY</strong>. Always rely on your aircraft's certified instruments as the primary source of flight data. The watch should never be used for critical flight decisions.
+        </div>
+
+        <h3>Best Practices</h3>
+        <ul>
+            <li>Ensure the watch is <strong>snugly fitted</strong> to your wrist to minimize movement</li>
+            <li>Start the aerobatic activity <strong>before your first pull maneuver</strong> to allow proper calibration</li>
+            <li>Verify calibration by comparing the displayed values with your aircraft instruments during the first maneuver</li>
+            <li>Remember that the watch display should <strong>not be watched during aerobatic maneuvers</strong> - check values after completing figures</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>17. Bonus</h2>
         <p>Since Aerobatic Flight Logger uses HealthKit Workout Sessions to keep the app active during your flight, you will be able to see history of flight sessions in the Workout Sessions of the Health application on your iPhone.</p>
         <img src="25-HealthWorkout.JPEG" alt="Health Workout Sessions" class="screenshot">
     </div>
