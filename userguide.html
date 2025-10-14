@@ -273,17 +273,17 @@
         <p>The Flight Detail screen is similar to the Summary screen.</p>
     </div>
 
-    <div class="section">
+<div class="section">
         <h2>16. G-Force Measurement System (Version 1.0.1+)</h2>
         
         <div class="info-box">
-            <strong>🆕 New in Version 1.0.1</strong>: The G-force measurement algorithm has been completely redesigned to provide significantly more accurate readings during aerobatic maneuvers.
+            <strong>🆕 New in Version 1.0.1</strong>: The G-force measurement algorithm has been completely redesigned with advanced multi-layer filtering and temporal validation to provide significantly more accurate readings during aerobatic maneuvers.
         </div>
 
         <div class="technical-section">
             <h3>How It Works</h3>
             
-            <p><strong>Version 1.0.1 introduces a revolutionary approach to G-force measurement</strong> using advanced 3D vector analysis and automatic calibration. Here's how the system works:</p>
+            <p><strong>Version 1.0.1 introduces a revolutionary approach to G-force measurement</strong> using advanced 3D vector analysis, multi-layer filtering, and temporal validation. Here's how the system works:</p>
 
             <h3>1. 3D Vector Magnitude Calculation</h3>
             <p>Unlike traditional single-axis measurements, the app now calculates the <strong>total acceleration magnitude using all three axes</strong> (X, Y, Z) simultaneously. This ensures accurate readings <strong>regardless of wrist orientation</strong> during complex aerobatic maneuvers such as rolls, loops, or inverted flight.</p>
@@ -293,8 +293,43 @@
                 G<sub>total</sub> = √(X² + Y² + Z²)
             </p>
 
-            <h3>2. Automatic Calibration</h3>
-            <p>During your <strong>first positive G maneuver</strong> (typically the initial pull to 45° at approximately +2G in a barrel roll or similar figure), the system automatically calibrates by capturing the <strong>reference direction for positive G-forces</strong>.</p>
+            <h3>2. Advanced Multi-Layer Filtering System</h3>
+            <p>Raw accelerometer data contains noise from vibrations, arm movements, and aircraft motion. Version 1.0.1 applies a sophisticated <strong>4-stage filtering pipeline</strong> running at 50 Hz (50 samples per second):</p>
+            
+            <ul>
+                <li><strong>Stage 1 - Physical Limit Capping</strong>: Values are clamped to ±10G to reject obviously aberrant readings</li>
+                <li><strong>Stage 2 - Median Filter (100ms window)</strong>: Eliminates transient spikes by taking the median of 5 consecutive samples</li>
+                <li><strong>Stage 3 - Trimmed Mean (200ms window)</strong>: Averages 10 samples after removing the 20% most extreme values (2 highest + 2 lowest) for robust averaging</li>
+                <li><strong>Stage 4 - Low-Pass Exponential Filter</strong>: Applies exponential smoothing to reduce remaining noise while preserving peak values</li>
+            </ul>
+
+            <div class="note">
+                <strong>Result</strong>: This multi-stage approach effectively eliminates false peaks from brief arm movements (typically 0.05-0.2 seconds) while accurately capturing real G-forces from aerobatic maneuvers (typically 0.5+ seconds).
+            </div>
+
+            <h3>3. Temporal Validation System</h3>
+            <p>The most significant improvement in version 1.0.1 is the <strong>temporal validation of maximum values</strong>. To prevent recording false peaks from brief arm movements, the system requires G-forces to be <strong>sustained for a minimum duration</strong> before accepting them as valid maxima.</p>
+            
+            <p><strong>How it works:</strong></p>
+            <ul>
+                <li>When a new peak is detected, it becomes a <strong>"candidate maximum"</strong></li>
+                <li>The system monitors if the G-force remains within <strong>80% of the peak value</strong></li>
+                <li>Only if sustained for the configured duration (default: <strong>500ms</strong>) is it recorded as a valid maximum</li>
+                <li>Brief spikes that drop quickly are automatically rejected</li>
+            </ul>
+
+            <p><strong>Example:</strong></p>
+            <ul>
+                <li>❌ <strong>Rejected</strong>: +5.3G spike for 0.05 seconds (quick arm movement)</li>
+                <li>✅ <strong>Accepted</strong>: +2.5G sustained for 0.6 seconds (real aerobatic maneuver)</li>
+            </ul>
+
+            <div class="note">
+                <strong>⚙️ Configurable Parameter</strong>: The validation time (delta-t) can be adjusted in Settings → G-Forces Alerts → "Δt Validation" from 100ms to 1000ms (default: 500ms). Pilots can fine-tune this parameter based on their flying style and aircraft characteristics.
+            </div>
+
+            <h3>4. Automatic Calibration</h3>
+            <p>During your <strong>first positive G maneuver</strong> (typically the initial pull to approximately +2G in a barrel roll or similar figure), the system automatically calibrates by capturing the <strong>reference direction for positive G-forces</strong>.</p>
             
             <p>The calibration process:</p>
             <ul>
@@ -304,34 +339,69 @@
                 <li>This reference remains valid for the entire aerobatic session</li>
             </ul>
 
-            <h3>3. Intelligent G+ / G- Detection</h3>
-            <p>The app uses <strong>geometric analysis in 3D space</strong> to distinguish between positive and negative G-forces. Imagine a sphere where every point represents a possible acceleration vector:</p>
+            <h3>5. Intelligent G+ / G- Detection</h3>
+            <p>The app uses <strong>geometric analysis in 3D space</strong> to distinguish between positive and negative G-forces. The system analyzes the angle between the current acceleration vector and the calibrated reference direction:</p>
 
             <img src="g-forces-sphere-diagram.jpg" alt="G-Forces 3D Sphere Geometry" class="screenshot" style="max-width: 70%;">
 
             <p>The detection zones are defined as follows:</p>
             <ul>
-                <li><strong>G+ Zone (Green Cone)</strong>: Vectors within 45° of the reference direction create a 90° total opening cone. Any acceleration in this cone is classified as positive G-force.</li>
-                <li><strong>G- Zone (Red Cone)</strong>: Vectors in the opposite hemisphere (angle &gt; 135° from reference) are classified as negative G-force.</li>
-                <li><strong>Neutral Zone</strong>: Vectors between 45° and 135° are in a transition zone where the system uses proportional calculation.</li>
+                <li><strong>G+ Hemisphere (Green)</strong>: Vectors with angle &lt; 90° from reference direction are classified as positive G-force</li>
+                <li><strong>G- Hemisphere (Red)</strong>: Vectors with angle &gt; 90° from reference direction are classified as negative G-force</li>
+                <li>The boundary at exactly 90° provides clean separation between positive and negative zones</li>
             </ul>
 
             <div class="note">
-                <strong>Mathematical principle</strong>: The system uses the dot product between the current acceleration vector and the reference vector to calculate the angle: <code>cos(θ) = (V⃗·R⃗) / (|V⃗| × |R⃗|)</code>
+                <strong>Mathematical principle</strong>: The system uses the dot product between the current acceleration vector and the reference vector to calculate the angle: <code>cos(θ) = (V⃗·R⃗) / (|V⃗| × |R⃗|)</code>. If cos(θ) &gt; 0 (angle &lt; 90°), it's G+; otherwise it's G-.
             </div>
 
-            <h3>4. Low-Pass Filtering</h3>
-            <p>Raw accelerometer data contains significant noise and vibrations from the aircraft. Version 1.0.1 applies <strong>exponential smoothing</strong> (low-pass filter) to reduce noise while preserving important peak values. This ensures the displayed G-forces are stable and readable during flight.</p>
-
-            <h3>5. Alert System</h3>
-            <p>The alert system is based on <strong>absolute G magnitude</strong> for maximum reliability:</p>
+            <h3>6. Alert System</h3>
+            <p>The alert system (optional, OFF by default) is based on <strong>absolute G magnitude</strong> for maximum reliability. Alerts are <strong>2 seconds long</strong> with strong haptic feedback:</p>
             <ul>
-                <li><strong>Rule 1</strong>: Instant alert when absolute G exceeds threshold (default: 6.0G)</li>
-                <li><strong>Rule 2</strong>: Alert when G exceeds threshold for sustained duration (default: 4.0G for 5 seconds)</li>
+                <li><strong>Rule 1 - Discontinuous Pattern</strong>: Instant alert when absolute G exceeds threshold (default: 6.0G). Four pulses spaced 0.5s apart with sound + strong haptic feedback</li>
+                <li><strong>Rule 2 - Continuous Pattern</strong>: Alert when G exceeds threshold for sustained duration (default: 4.0G for 5 seconds). One sound followed by continuous haptic feedback over 2 seconds</li>
             </ul>
 
+            <div class="note">
+                <strong>⚙️ Safety Feature</strong>: Alerts are disabled by default to avoid distracting pilots during flight. Enable in Settings only if you are confident they will not interfere with your flying.
+            </div>
+
             <h3>Why This Approach is Better</h3>
-            <p>The previous version (1.0) used only the Z-axis perpendicular to the watch screen. This caused inaccurate readings when the wrist changed position during maneuvers. <strong>Version 1.0.1's 3D approach is orientation-independent</strong> and provides consistent accuracy regardless of how you wear your watch or position your arm during flight.</p>
+            <p>The previous version (1.0) used only the Z-axis perpendicular to the watch screen and accepted instantaneous peak values. This caused two major issues:</p>
+            <ul>
+                <li><strong>Orientation dependency</strong>: Readings varied wildly with wrist position</li>
+                <li><strong>False peaks</strong>: Brief arm movements registered as high G-forces (5-12G from simple gestures)</li>
+            </ul>
+            
+            <p><strong>Version 1.0.1 solves both problems:</strong></p>
+            <ul>
+                <li>✅ <strong>3D approach is orientation-independent</strong> and provides consistent accuracy regardless of wrist position</li>
+                <li>✅ <strong>Temporal validation eliminates false peaks</strong> by requiring sustained G-forces, not instantaneous spikes</li>
+                <li>✅ <strong>Multi-layer filtering</strong> removes noise while preserving real aerobatic data</li>
+            </ul>
+
+            <h3>Measurement Pipeline Summary</h3>
+            <p style="background: #f5f5f5; padding: 15px; border-left: 4px solid #2196F3; font-family: monospace; font-size: 0.9em;">
+                Raw Data (50Hz)<br>
+                &nbsp;&nbsp;↓<br>
+                1. 3D Vector Magnitude ✓<br>
+                &nbsp;&nbsp;↓<br>
+                2. Physical Limit Capping (±10G) ✓<br>
+                &nbsp;&nbsp;↓<br>
+                3. Median Filter (100ms) ✓<br>
+                &nbsp;&nbsp;↓<br>
+                4. Trimmed Mean (200ms) ✓<br>
+                &nbsp;&nbsp;↓<br>
+                5. Low-Pass Filter ✓<br>
+                &nbsp;&nbsp;↓<br>
+                6. Auto Calibration ✓<br>
+                &nbsp;&nbsp;↓<br>
+                7. G+/G- Detection (90° cones) ✓<br>
+                &nbsp;&nbsp;↓<br>
+                8. Temporal Validation (500ms default) ✓<br>
+                &nbsp;&nbsp;↓<br>
+                Final Display Value (0.1G precision)
+            </p>
         </div>
 
         <div class="note">
@@ -342,11 +412,26 @@
         <ul>
             <li>Ensure the watch is <strong>snugly fitted</strong> to your wrist to minimize movement</li>
             <li>Start the aerobatic activity <strong>before your first pull maneuver</strong> to allow proper calibration</li>
+            <li>Adjust the <strong>Δt Validation parameter</strong> (Settings → G-Forces Alerts) based on your flying style:
+                <ul>
+                    <li><strong>300-400ms</strong>: For dynamic, quick figures with brief G-forces</li>
+                    <li><strong>500ms (default)</strong>: Balanced setting for most aerobatic flying</li>
+                    <li><strong>600-800ms</strong>: For sustained figures and smoother flying styles</li>
+                </ul>
+            </li>
             <li>Verify calibration by comparing the displayed values with your aircraft instruments during the first maneuver</li>
             <li>Remember that the watch display should <strong>not be watched during aerobatic maneuvers</strong> - check values after completing figures</li>
+            <li>After landing, review the Summary screen to see your maximum G+ and G- values for the flight</li>
+        </ul>
+
+        <h3>Troubleshooting</h3>
+        <ul>
+            <li><strong>Values seem too low</strong>: Try reducing Δt Validation to 300-400ms in Settings</li>
+            <li><strong>Still seeing occasional false peaks</strong>: Increase Δt Validation to 600-800ms in Settings</li>
+            <li><strong>No calibration happening</strong>: Ensure you perform a clear +2G pull maneuver early in your sequence</li>
+            <li><strong>Inconsistent readings</strong>: Check that the watch is snugly fitted and doesn't move on your wrist</li>
         </ul>
     </div>
-
     <div class="section">
         <h2>17. Bonus</h2>
         <p>Since Aerobatic Flight Logger uses HealthKit Workout Sessions to keep the app active during your flight, you will be able to see history of flight sessions in the Workout Sessions of the Health application on your iPhone.</p>
