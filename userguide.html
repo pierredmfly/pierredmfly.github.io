@@ -400,29 +400,6 @@
                 <li>✅ <strong>Temporal validation eliminates false peaks</strong> by requiring sustained G-forces, not instantaneous spikes</li>
                 <li>✅ <strong>Multi-layer filtering</strong> removes noise while preserving real aerobatic data</li>
             </ul>
-
-            <h3>Measurement Pipeline Summary</h3>
-            <p style="background: #f5f5f5; padding: 15px; border-left: 4px solid #2196F3; font-family: monospace; font-size: 0.9em;">
-                Raw Data (50Hz)<br>
-                &nbsp;&nbsp;↓<br>
-                1. 3D Vector Magnitude ✓<br>
-                &nbsp;&nbsp;↓<br>
-                2. Physical Limit Capping (±10G) ✓<br>
-                &nbsp;&nbsp;↓<br>
-                3. Median Filter (100ms) ✓<br>
-                &nbsp;&nbsp;↓<br>
-                4. Trimmed Mean (200ms) ✓<br>
-                &nbsp;&nbsp;↓<br>
-                5. Low-Pass Filter ✓<br>
-                &nbsp;&nbsp;↓<br>
-                6. Auto Calibration ✓<br>
-                &nbsp;&nbsp;↓<br>
-                7. G+/G- Detection (90° cones) ✓<br>
-                &nbsp;&nbsp;↓<br>
-                8. Temporal Validation (500ms default) ✓<br>
-                &nbsp;&nbsp;↓<br>
-                Final Display Value (0.1G precision)
-            </p>
         </div>
 
         <div class="note">
