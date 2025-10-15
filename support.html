@@ -111,14 +111,21 @@
     <div class="faq-item">
         <div class="faq-question">How accurate is the Apple Watch G-force measurement?</div>
         <div class="faq-answer">
-            <strong>IMPORTANT:</strong> Apple Watch G-force data should be considered as SECONDARY INFORMATION ONLY. The accuracy varies significantly based on:
+            <strong>Version 1.0.1 introduces significant improvements</strong> with a completely redesigned measurement system featuring:
             <ul>
-                <li>Watch position on your wrist</li>
-                <li>Arm movement during maneuvers</li>
-                <li>How tightly the watch is worn</li>
-                <li>Wrist orientation relative to aircraft axes</li>
+                <li><strong>3D vector analysis</strong> - orientation-independent measurements</li>
+                <li><strong>Advanced multi-layer filtering</strong> - eliminates noise and false peaks</li>
+                <li><strong>Temporal validation</strong> - requires sustained G-forces (configurable 100-1000ms)</li>
+                <li><strong>Automatic calibration</strong> - adapts to your flying style</li>
             </ul>
-            <strong>Always rely on your aircraft's instruments as the primary source of G-force data.</strong> Use watch data for reference and logging purposes only, never for safety-critical decisions.
+            <strong>However, Apple Watch data should still be considered SECONDARY INFORMATION ONLY.</strong> Accuracy can be affected by:
+            <ul>
+                <li>Watch position and fit on your wrist</li>
+                <li>Brief arm movements during maneuvers</li>
+                <li>Watch model and accelerometer sensitivity</li>
+            </ul>
+            <strong>Always rely on your aircraft's certified instruments as the primary source of G-force data.</strong> The watch is excellent for reference and post-flight logging, but never for safety-critical decisions during flight.
+            <p style="margin-top: 10px;"><em>Tip: Adjust the Δt Validation parameter in Settings (default: 500ms) to fine-tune accuracy for your flying style.</em></p>
         </div>
     </div>
 
@@ -140,18 +147,68 @@
 
     <div class="faq-item">
         <div class="faq-question">How does G-force monitoring work?</div>
-        <div class="faq-answer">During aerobatic flights, the app uses your watch's accelerometer to measure G-forces in real-time. G-forces are displayed live during the aerobatic sequence. You can configure two alert rules:
+        <div class="faq-answer">
+            <strong>Version 1.0.1 features a revolutionary measurement system:</strong>
             <ul>
-                <li><strong>Rule 1:</strong> Alert when maximum G exceeds a threshold (default 6.0 G)</li>
-                <li><strong>Rule 2:</strong> Alert when G exceeds a threshold for a sustained duration (default 4.0 G for 5 seconds)</li>
+                <li><strong>Automatic calibration:</strong> Captures reference direction during your first +G maneuver (~2G)</li>
+                <li><strong>3D hemisphere detection:</strong> Distinguishes G+ (angle &lt; 90°) from G- (angle &gt; 90°) regardless of wrist orientation</li>
+                <li><strong>4-stage filtering pipeline:</strong> Physical limits → Median filter → Trimmed mean → Low-pass filter</li>
+                <li><strong>Temporal validation:</strong> Only records G-forces sustained for the configured duration (default: 500ms)</li>
+                <li><strong>Real-time display:</strong> Live G-forces shown during aerobatic sequences</li>
             </ul>
-            Remember: This data is for reference only. Always trust your aircraft's instruments.
+            
+            <strong>Optional Alert System (OFF by default):</strong>
+            <ul>
+                <li><strong>Rule 1:</strong> Instant alert when max G exceeds threshold (default: 6.0G) - 4 pulses over 2 seconds</li>
+                <li><strong>Rule 2:</strong> Alert when G exceeds threshold for sustained duration (default: 4.0G for 5s) - continuous haptic over 2 seconds</li>
+                <li><strong>Δt Validation:</strong> Configurable minimum duration (100-1000ms) to validate max values</li>
+            </ul>
+            
+            <p><strong>See User Guide Section 16</strong> for complete technical details about the measurement system.</p>
+            <p><em>Remember: This data is for reference only. Always trust your aircraft's certified instruments.</em></p>
         </div>
     </div>
 
     <div class="faq-item">
         <div class="faq-question">Can I distinguish between positive and negative G-forces?</div>
-        <div class="faq-answer">The app attempts to distinguish G+ (positive) and G- (negative) based on the accelerometer's Z-axis. However, accuracy depends on how you wear your watch and the orientation of your arm during maneuvers. The app also tracks absolute maximum G regardless of direction for reliability. Use this data as reference only.</div>
+        <div class="faq-answer">
+            <strong>Yes! Version 1.0.1 introduces intelligent G+/G- detection using 3D vector analysis:</strong>
+            <ul>
+                <li>The system automatically calibrates during your first positive G maneuver (typically around +2G)</li>
+                <li>It captures a reference direction for G+ in 3D space</li>
+                <li>Any acceleration vector within 90° of this reference = <strong style="color: green;">G+</strong></li>
+                <li>Any acceleration vector beyond 90° = <strong style="color: red;">G-</strong></li>
+                <li>This works <strong>regardless of wrist orientation</strong> - whether you're upright, inverted, or in a roll</li>
+            </ul>
+            
+            <p>The app displays three values in the summary:</p>
+            <ul>
+                <li><strong style="color: green;">G+ Max:</strong> Highest positive G-force sustained during flight</li>
+                <li><strong style="color: red;">G- Max:</strong> Highest negative G-force sustained during flight</li>
+                <li><strong style="color: orange;">G Max:</strong> Highest absolute G-force regardless of direction</li>
+            </ul>
+            
+            <p><em>Note: Brief spikes from arm movements are automatically filtered out by the temporal validation system.</em></p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">What is the Δt Validation parameter and how should I adjust it?</div>
+        <div class="faq-answer">
+            <strong>Δt Validation</strong> (delta-t) is the minimum duration a G-force must be sustained before being recorded as a maximum value. This prevents false peaks from brief arm movements.
+            
+            <p><strong>Default: 500ms (0.5 seconds)</strong> - Suitable for most aerobatic flying</p>
+            
+            <p><strong>When to adjust:</strong></p>
+            <ul>
+                <li><strong>Lower (300-400ms):</strong> If the app isn't capturing your actual peak G-forces, try a shorter validation time. Useful for quick, dynamic figures.</li>
+                <li><strong>Higher (600-800ms):</strong> If you still see occasional false peaks in the summary (from arm movements), increase the validation time. Better for smooth, sustained figures.</li>
+            </ul>
+            
+            <p><strong>How to adjust:</strong> Settings → G-Forces Alerts → Δt Validation slider (100-1000ms)</p>
+            
+            <p><em>Tip: Start with the default 500ms, fly a session, then adjust based on your results. Most pilots find 400-600ms ideal.</em></p>
+        </div>
     </div>
 
     <div class="faq-item">
@@ -207,8 +264,11 @@
     <ul>
         <li>Configure your preferred time calculation method in Settings before first flight</li>
         <li>Set appropriate G-force alert thresholds for your aircraft and flying style</li>
+        <li><strong>Adjust Δt Validation (Settings → G-Forces Alerts) based on your flying style (default: 500ms)</strong></li>
+        <li><strong>Start aerobatic activity BEFORE your first pull maneuver to allow proper G+ calibration</strong></li>
         <li>Wear your Apple Watch on your non-control hand for more stable readings</li>
         <li>Wear the watch snugly but comfortably</li>
+        <li><strong>Check G-force values AFTER completing figures, not during flight</strong></li>
         <li>Keep your watch charged - Workout Sessions consume more battery</li>
         <li>Review Activity Trigger Rules to match your flying procedures</li>
         <li><strong>Always cross-reference watch G-force data with aircraft instruments</strong></li>
